@@ -34,7 +34,13 @@ class FrontController extends AbstractController {
      * @var object $em
      *   Instance of the Entity Manager.
      */
-    private $em = null;
+    private $em = NULL;
+
+    /**
+     * @var object $userRepo
+     *   Instance of User repository
+     */
+    private $userRepo = NULL;
 
     /**
      * Initializes class variables.
@@ -44,6 +50,7 @@ class FrontController extends AbstractController {
      */
     public function __construct(EntityManagerInterface $em) {
         $this->em = $em;
+        $this->userRepo = $em->getRepository(User::class);
     }
 
     /**
@@ -72,7 +79,7 @@ class FrontController extends AbstractController {
                 $activeUsers = $result['message'];
             }
             else {
-                $activeUsers = null;
+                $activeUsers = NULL;
             }
             return $this->render('home/index.html.twig', [
                 'activeUsers' => $activeUsers,
@@ -109,7 +116,7 @@ class FrontController extends AbstractController {
             $userData["fullName"] = $request->request->get("fullName");
             $userData["email"] = $request->request->get("email");
 
-            $result = null;
+            $result = NULL;
             $addUser = new AddUser($this->em, $userData);
             $result = $addUser->validateUserData();
             if (count($result) < 1) {
@@ -284,6 +291,9 @@ class FrontController extends AbstractController {
      *   @Route("/logout", name = "app_logout", methods={"POST"})
      *     Handles url request for "/logout".
      *   
+     *   @param Pusher $pusher 
+     *     Instance of the Pusher class.
+     * 
      *   @param Request $request
      *     Instance of the Request class.
      * 
@@ -508,6 +518,9 @@ class FrontController extends AbstractController {
     /**
      * Sets cookie for logged in session
      * 
+     *   @param Pusher $pusher 
+     *     Instance of the Pusher class.
+     * 
      *   @param int $userId
      *     User identifier.
      * 
@@ -516,7 +529,7 @@ class FrontController extends AbstractController {
      */
     private function setLoginedSession(Request $request, int $userId, Pusher $pusher) {
         try {
-            $user = $this->em->getRepository(User::class)->findOneBy(['id' => $userId]);
+            $user = $this->userRepo->findOneBy(['id' => $userId]);
             $user->setLogin(TRUE);
             $this->em->merge($user);
             $this->em->flush();
@@ -529,11 +542,7 @@ class FrontController extends AbstractController {
 
         $response = new Response();
         $encrypteData = base64_encode($userId);
-        $response->headers->setCookie(new Cookie('current_user', $encrypteData, strtotime('tomorrow'), '/'));
-        $content = "login";
-        $response->setContent($content);
-        $response->headers->set('Content-Type', 'text/html');
-        $response->send();
+        $this->sendResponse("login", $encrypteData);
     }
 
     /**
@@ -545,7 +554,7 @@ class FrontController extends AbstractController {
     private function unsetCurrentUser(Request $request, Pusher $pusher) {
         $userId = base64_decode($request->cookies->get('current_user'));
         try {
-            $user = $this->em->getRepository(User::class)->findOneBy(['id' => $userId]);
+            $user = $this->userRepo->findOneBy(['id' => $userId]);
             $user->setLogin(FALSE);
             $this->em->merge($user);
             $this->em->flush();
@@ -556,12 +565,7 @@ class FrontController extends AbstractController {
 
         $pusher->trigger("chirptalk-development", "active-users", "update");
 
-        $response = new Response();
-        $response->headers->setCookie(new Cookie('current_user', null, strtotime('tomorrow'), '/'));
-        $content = "logout";
-        $response->setContent($content);
-        $response->headers->set('Content-Type', 'text/html');
-        $response->send();
+        $this->sendResponse("logout", NULL);
     }
 
     /**
@@ -569,7 +573,10 @@ class FrontController extends AbstractController {
      * 
      *   @Route("/Update/userList", name = "app_userList", methods={"POST"})
      *     Handles url request for "/Update/userList".
-     *   
+     * 
+     *   @param Pusher $pusher 
+     *     Instance of the Pusher class.
+     * 
      *   @param Request $request
      *     Instance of the Request class.
      * 
@@ -589,5 +596,24 @@ class FrontController extends AbstractController {
 
             return new JsonResponse($result);
         }
+    }
+
+    /**
+     * Sends response 
+     *   
+     *   @param string $content
+     *      Content of the response.
+     * 
+     *   @param mixed $userId
+     *     User's id.
+     * 
+     *   @return void
+     */
+    private function sendResponse(string $content, mixed $userId) {
+        $response = new Response();
+        $response->headers->setCookie(new Cookie('current_user', $userId, strtotime('tomorrow'), '/'));
+        $response->setContent($content);
+        $response->headers->set('Content-Type', 'text/html');
+        $response->send();
     }
 }
