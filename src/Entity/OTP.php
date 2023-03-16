@@ -12,20 +12,20 @@ class OTP
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = NULL;
 
     #[ORM\Column(length: 10)]
-    private ?string $otp = null;
+    private ?string $otp = NULL;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createTime = null;
+    private ?\DateTimeInterface $createTime = NULL;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $status = null;
+    #[ORM\Column(length: 20, nullable: TRUE)]
+    private ?string $status = NULL;
 
     #[ORM\ManyToOne(inversedBy: 'otps')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $userId = null;
+    #[ORM\JoinColumn(nullable: FALSE)]
+    private ?User $userId = NULL;
 
     public function getId(): ?int
     {

@@ -18,19 +18,19 @@ class PostHandler
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var object $userRepo
      *   Instance of User repository
      */
-    private $userRepo = null;
+    private $userRepo = NULL;
 
     /**
      * @var object $postRepo
      *   Instance of Posts repository
      */
-    private $postRepo = null;
+    private $postRepo = NULL;
 
     /**
      * @var array $formData 
@@ -154,7 +154,7 @@ class PostHandler
         ];
 
         $result['content'] = $post->getText();
-        $result['like_id'] = null;
+        $result['like_id'] = NULL;
 
         $likes = $post->getLikes();
         if ($likes) {

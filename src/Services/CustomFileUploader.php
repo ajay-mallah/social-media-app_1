@@ -23,7 +23,7 @@ class CustomFileUploader
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var $targetDirectory

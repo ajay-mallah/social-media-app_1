@@ -21,7 +21,7 @@ class PostsRepository extends ServiceEntityRepository
         parent::__construct($registry, Posts::class);
     }
 
-    public function save(Posts $entity, bool $flush = false): void
+    public function save(Posts $entity, bool $flush = FALSE): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PostsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Posts $entity, bool $flush = false): void
+    public function remove(Posts $entity, bool $flush = FALSE): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -38,29 +38,4 @@ class PostsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return Posts[] Returns an array of Posts objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Posts
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

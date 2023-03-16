@@ -20,13 +20,13 @@ class ResetPassword extends Mailer
      * @var object $userRepo
      *   Instance of User repository
      */
-    private $userRepo = null;
+    private $userRepo = NULL;
 
     /** 
      * @var EntityManagerInterface $em
      *   Entity Manager instance.
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var array $userData 
@@ -69,15 +69,13 @@ class ResetPassword extends Mailer
             else if ($user->getResetKey() && $user->isResetKeyStatus()) {
                 return $this->mailResetKey($user->getEmail(), $user->getResetKey(), $user->getFullname());
             }
-            else {
-                $email = $user->getEmail();
-                $key = $this->generateKey();
-                $user->setResetKey($key);
-                $user->setResetKeyStatus(TRUE);
-                $this->em->merge($user);
-                $this->em->flush();
-                return $this->mailResetKey($user->getEmail(), $user->getResetKey(), $user->getFullname());
-            }
+            $email = $user->getEmail();
+            $key = $this->generateKey();
+            $user->setResetKey($key);
+            $user->setResetKeyStatus(TRUE);
+            $this->em->merge($user);
+            $this->em->flush();
+            return $this->mailResetKey($user->getEmail(), $user->getResetKey(), $user->getFullname());
         }
         catch (GlobalException $e) {
             echo $e->getMessage();

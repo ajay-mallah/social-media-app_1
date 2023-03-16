@@ -16,13 +16,13 @@ use Exception;
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var object $repository
      *   Instance of User repository
      */
-    private $repository = null;
+    private $repository = NULL;
 
     /**
      * @var array $userData 
@@ -41,7 +41,7 @@ use Exception;
     public function __construct(EntityManagerInterface $em, array $userData) {
         // Grabbing data 
         $this->em = $em;
-        $this->repository = $this->em->getRepository(User::class);
+        $this->repository = $em->getRepository(User::class);
         $this->userData= $userData;
     }
 
@@ -96,7 +96,7 @@ use Exception;
      *     Returns TRUE if user id exists.
      */
     private function usernameExist() {
-        $user = null;
+        $user = NULL;
         try {
             $user = $this->repository->findOneBy(['username' => $this->userData["username"]]);
             return $user ? TRUE : FALSE;
@@ -113,7 +113,7 @@ use Exception;
      *     Returns TRUE if user email already exists.
      */
     private function emailExist() {
-        $user = null;
+        $user = NULL;
         try {
             $user = $this->repository->findOneBy(['email' => $this->userData["email"]]);
             return $user ? TRUE : FALSE;

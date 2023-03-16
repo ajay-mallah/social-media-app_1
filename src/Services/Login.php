@@ -16,13 +16,13 @@ use Exception;
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var object $repository
      *   Instance of User repository
      */
-    private $repository = null;
+    private $repository = NULL;
 
     /**
      * @var array $userData 

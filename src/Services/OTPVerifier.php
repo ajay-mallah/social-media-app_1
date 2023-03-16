@@ -16,13 +16,13 @@ class OTPVerifier
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var object $repository
      *   Instance of OTP repository
      */
-    private $repository = null;
+    private $repository = NULL;
 
     /**
      * @var array $otpData 

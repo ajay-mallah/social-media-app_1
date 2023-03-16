@@ -17,25 +17,25 @@ class LikeHandler
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var object $userRepo
      *   Instance of User repository
      */
-    private $userRepo = null;
+    private $userRepo = NULL;
 
     /**
      * @var object $postRepo
      *   Instance of Posts repository
      */
-    private $postRepo = null;
+    private $postRepo = NULL;
 
     /**
      * @var object $likeRepo
      *   Instance of Likes repository
      */
-    private $likeRepo = null;
+    private $likeRepo = NULL;
 
     /**
      * @var array $formData 

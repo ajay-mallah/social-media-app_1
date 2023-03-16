@@ -14,14 +14,14 @@ class Posts
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = NULL;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $authorId = null;
+    #[ORM\JoinColumn(nullable: FALSE)]
+    private ?User $authorId = NULL;
 
     #[ORM\Column(length: 2000)]
-    private ?string $text = null;
+    private ?string $text = NULL;
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Likes::class, orphanRemoval: true)]
     private Collection $likes;
@@ -30,7 +30,7 @@ class Posts
     private Collection $comments;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createTime = null;
+    private ?\DateTimeInterface $createTime = NULL;
 
     public function __construct()
     {
@@ -88,9 +88,9 @@ class Posts
     public function removeLike(Likes $like): self
     {
         if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
+            // set the owning side to NULL (unless already changed)
             if ($like->getPost() === $this) {
-                $like->setPost(null);
+                $like->setPost(NULL);
             }
         }
 
@@ -118,9 +118,9 @@ class Posts
     public function removeComment(Comments $comment): self
     {
         if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
+            // set the owning side to NULL (unless already changed)
             if ($comment->getPost() === $this) {
-                $comment->setPost(null);
+                $comment->setPost(NULL);
             }
         }
 

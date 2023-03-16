@@ -13,37 +13,37 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = NULL;
 
     #[ORM\Column(length: 255)]
-    private ?string $username = null;
+    private ?string $username = NULL;
 
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    private ?string $email = NULL;
 
     #[ORM\Column(length: 100)]
-    private ?string $fullname = null;
+    private ?string $fullname = NULL;
 
     #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    private ?string $password = NULL;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $status = null;
+    #[ORM\Column(length: 20, nullable: TRUE)]
+    private ?string $status = NULL;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageUrl = null;
+    #[ORM\Column(length: 255, nullable: TRUE)]
+    private ?string $imageUrl = NULL;
 
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $resetKey = null;
+    #[ORM\Column(length: 10, nullable: TRUE)]
+    private ?string $resetKey = NULL;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $resetKeyStatus = null;
+    #[ORM\Column(nullable: TRUE)]
+    private ?bool $resetKeyStatus = NULL;
 
-    #[ORM\OneToMany(mappedBy: 'authorId', targetEntity: Posts::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'authorId', targetEntity: Posts::class, orphanRemoval: TRUE)]
     private Collection $posts;
 
     #[ORM\Column]
-    private ?bool $login = null;
+    private ?bool $login = NULL;
 
     public function __construct()
     {
@@ -172,9 +172,9 @@ class User
     public function removePost(Posts $post): self
     {
         if ($this->posts->removeElement($post)) {
-            // set the owning side to null (unless already changed)
+            // set the owning side to NULL (unless already changed)
             if ($post->getAuthorId() === $this) {
-                $post->setAuthorId(null);
+                $post->setAuthorId(NULL);
             }
         }
 

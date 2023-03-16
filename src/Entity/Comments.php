@@ -12,21 +12,21 @@ class Comments
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = NULL;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $commenter = null;
+    #[ORM\JoinColumn(nullable: FALSE)]
+    private ?User $commenter = NULL;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Posts $post = null;
+    #[ORM\JoinColumn(nullable: FALSE)]
+    private ?Posts $post = NULL;
 
     #[ORM\Column(length: 2000)]
-    private ?string $comment = null;
+    private ?string $comment = NULL;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $createTime = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: TRUE)]
+    private ?\DateTimeInterface $createTime = NULL;
 
     public function getId(): ?int
     {

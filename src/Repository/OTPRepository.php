@@ -21,7 +21,7 @@ class OTPRepository extends ServiceEntityRepository
         parent::__construct($registry, OTP::class);
     }
 
-    public function save(OTP $entity, bool $flush = false): void
+    public function save(OTP $entity, bool $flush = FALSE): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class OTPRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(OTP $entity, bool $flush = false): void
+    public function remove(OTP $entity, bool $flush = FALSE): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -38,29 +38,4 @@ class OTPRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return OTP[] Returns an array of OTP objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?OTP
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

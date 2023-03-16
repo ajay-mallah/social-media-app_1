@@ -21,7 +21,7 @@ class LikesRepository extends ServiceEntityRepository
         parent::__construct($registry, Likes::class);
     }
 
-    public function save(Likes $entity, bool $flush = false): void
+    public function save(Likes $entity, bool $flush = FALSE): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class LikesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Likes $entity, bool $flush = false): void
+    public function remove(Likes $entity, bool $flush = FALSE): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -38,29 +38,4 @@ class LikesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return Likes[] Returns an array of Likes objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Likes
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

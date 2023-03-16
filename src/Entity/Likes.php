@@ -11,18 +11,18 @@ class Likes
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = NUll;
 
     #[ORM\Column]
-    private ?bool $liked = null;
+    private ?bool $liked = NUll;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $userId = null;
+    #[ORM\JoinColumn(nullable: FALSE)]
+    private ?User $userId = NUll;
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Posts $post = null;
+    #[ORM\JoinColumn(nullable: FALSE)]
+    private ?Posts $post = NUll;
 
     public function getId(): ?int
     {
