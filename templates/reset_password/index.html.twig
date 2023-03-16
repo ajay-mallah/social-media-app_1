@@ -1,0 +1,53 @@
+{% extends 'base_login.html.twig' %}
+
+{% block title %}
+    Reset Password
+{% endblock %}
+
+{% block javascripts %}
+    <script src={{ asset('assets/js/resetPassword.js') }}></script>
+{% endblock %}
+
+{% block form %}
+    <div class="login-form" >
+        <p class="error" id="response-msg"></p>
+        <form class="verify-email flex-column enable" action='/reset/verify_email' method="post">
+            <div class="form-row d-flex flex-column px-2">
+                <label for="email">email</label>
+                <input type="email" name="email" id="email" title='email'>
+            </div>
+            <div class="form-row d-flex justify-content-center px-2">
+                <button type="submit" name="verify" class="btn w-100 d-flex justify-content-center align-items-center"><span class="text">verify</span> <span class="loader-btn"></span></button>
+            </div>
+            <div class="form-row or px-2">
+                <p>or</p>
+            </div>
+            <div class="form-row d-flex px-2">
+                <a href={{ "http://#{app.request.host}/login" }}>login</a>
+            </div>
+        </form>
+        <form class="reset flex-column" action="/reset/verify_email" method="post">
+            <div class="form-row d-flex flex-column px-2">
+                <label for="key">reset key</label>
+                <input type="text" name="reset-key"require>
+                <p id="error-reset-key" class="text-danger error"></p>
+            </div>
+            <div class="form-row d-flex flex-column px-2">
+                <label for="password">password</label>
+                <input type="password" name="password" id="password">
+                <p id="error-password" class="text-danger error"></p>
+            </div>
+            <div class="form-row d-flex flex-column px-2">
+                <label for="confPassword">confirm password</label>
+                <input type="password" name="confPassword" id="confPassword">
+                <p id="error-confPassword" class="text-danger error"></p>
+            </div>
+            <div class="form-row d-flex justify-content-center px-2">
+                <button type="submit" name="reset" class="btn w-100 d-flex justify-content-center align-items-center"><span class="text">reset password</span> <span class="loader-btn"></span></button>
+            </div>
+            <div class="form-row d-flex px-2">
+                <p>haven't recieved reset key ? <a href="#" id="resend">resend</a> <span class="resend-loading text-primary">loading...</span> <span id="resend-time">resend after <strong id="remain-time">10s</strong> </span></p>
+            </div>
+        </form>
+    </div>
+{% endblock %}

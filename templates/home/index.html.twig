@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={{ asset('assets/css/style.css') }}>
+{% endblock %}
+
+{% block javascripts %}
+    <script src={{ asset('assets/js/index.js') }}></script>
+    <script src={{ asset('assets/js/pusher.js') }}></script>
+{% endblock %}
+
+{% block navItems %}
+    <li class="nav-item"><a href="#">home</a></li>
+    <li class="nav-item" id="logout"><a href="#">logout</a></li>
+    <li class="nav-item">
+        <img src={{ asset('assets/image/icons/profile.png') }} alt="profile" id="add-profile-pic">
+        <div class="profile-form-container justify-content-center align-items-center">
+            <form action="/upload/profile" method="post" enctype="multipart/form-data" class="profile-form d-flex flex-column justify-content-center align-items-center">
+                <div class="preview-image">
+                    <img src="" alt="image preview" id="imgPreview">
+                </div>
+                <div class="form-row">
+                    <label for="upload-profile-pic" class="profile-label">choose profile pic</label>
+                    <input type="file" name="upload-profile-pic" id="upload-profile-pic">
+                </div>
+                <div class="cross-icon"><img src={{ asset('assets/image/icons/cross-icon.png') }} alt="cross"></div>
+                <button type="submit" name="upload-profile" class="btn">upload</button>
+            </form>
+        </div>
+    </li>
+{% endblock %}
+
+{% block main %}
+<div class="users-bar--container">
+    <section class="users-bar">
+        <p>active users</p>
+        <div class="users-container">
+            {% include 'blocks/users.html.twig' %}
+        </div>
+    </section>
+</div>
+    <section class="content">
+        <div class="post-box">
+            <h4 class="heading">Add new post</h4>
+            <textarea name="add-post" id="" cols="30" rows="10" placeholder="What's in your mind..."></textarea>
+            <button id="post-submit-btn" class="btn">post</button>
+        </div>
+        <h4 class="heading nav-menu--post">All Posts</h4>
+    <section class="posts">
+    {% if posts %}
+        {% for post in posts %}
+            {% include 'blocks/post.html.twig' %}
+        {% endfor %}
+    {% endif %}
+        </section>
+    </section>
+{% endblock %}

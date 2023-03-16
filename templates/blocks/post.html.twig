@@ -1,0 +1,69 @@
+{% if post %}
+<div class="post-container d-flex justify-content-start flex-column" post-id={{post.id}}>
+    <div class="user-detail-container d-flex justify-content-start align-items-center" author-id={{post.author.id}}>
+        {% if post.author.image %}
+            <img src={{ asset(post.author.image) }} alt="" class="user-icon">
+        {% else %}
+            <img src={{ asset('assets/image/icons/profile.png') }} alt="" class="user-icon">
+        {% endif %}
+        <div class="user-detail">
+            <h7 class="user-name">{{post.author.name}}</h7>
+            <p class="time-info mb-0">
+                posted on {% if post.author.time %}
+                    {{ post.author.time }} 
+                {% else %} ... 
+                {% endif %}
+            </p>
+        </div>
+        {% if post.author.id == user %}
+            <div class="edit-container edit-post-container">
+                <div class="edit-dots">
+                    <i class="dots"></i>
+                </div>
+                <ul class="edit-option" post-id={{ post.id }}>
+                    <li class='edit edit-post'>edit</li>
+                    <li class='delete delete-post'>delete</li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <div class="content-container">
+        <div class="post-text grow">{{ post.content ? post.content : null }}</div>
+        <div class="edit-post-input">
+            <textarea name="" cols="30" rows="6"> {{ post.content ? post.content : null }}</textarea>
+            <button class="post-edit-btn btn d-flex justify-content-center align-items-center" post-id={{ post.id }}><span class="text">save</span> <span class="loader-btn"></span> </button>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div class="action-container d-flex justify-content-end align-items-center">
+            <div class="likes d-flex justify-content-center align-items-center">
+                <img src={{ asset('assets/image/icons/comments.png') }} alt="" class="comment">
+                <span>comment</span>
+            </div>
+        </div>
+        <div class="comment-input">
+            <textarea name="" id="" cols="30" rows="4" placeholder="add comment..."></textarea>
+            <button class="comment-btn btn d-flex justify-content-center align-items-center" post-id={{ post.id }}><span class="text">comment</span> <span class="loader-btn"></span> </button>
+        </div>
+    </div>
+    <div class="post-info-container d-flex justify-content-between align-items-center">
+        <div class="likes-count d-flex justify-content-center align-items-center">
+            <img src={{ asset('assets/image/icons/like.png') }} alt="" class="like" post-id={{ post.id }} 
+                like-id={{ post.like_id ? post.like_id : 0 }}
+            >
+            <span class="total-like"><span>{{ post.likes_count }}</span> likes</span>
+        </div>
+        <div class="comments-count">
+            <span class="total-comment">
+            {{ post.comments ? post.comments|length : 0}}
+            </span> 
+            comments
+        </div>
+    </div>
+    <div class="user-comments--container">
+        {% for comment in post.comments %}
+            {% include 'blocks/comment.html.twig' %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

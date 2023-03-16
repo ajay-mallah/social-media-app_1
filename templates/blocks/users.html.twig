@@ -1,0 +1,8 @@
+{% if activeUsers %}
+    {% for activeUser in activeUsers %}    
+        <div class="users">
+            <img src={{ activeUser.image ? asset(activeUser.image) : asset('assets/image/icons/profile.png') }} alt="" class="user-icon">
+            <h7 class="user-name">{{activeUser.name}}</h7>
+        </div>
+    {% endfor %}
+{% endif %}
