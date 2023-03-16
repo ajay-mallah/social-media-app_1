@@ -18,25 +18,25 @@ class CommentHandler
      * @var object $em
      *   Instance of Entity Manager interface Instance
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var object $userRepo
      *   Instance of User repository
      */
-    private $userRepo = null;
+    private $userRepo = NULL;
 
     /**
      * @var object $postRepo
      *   Instance of Posts repository
      */
-    private $postRepo = null;
+    private $postRepo = NULL;
 
     /**
      * @var object $commentRepo
      *   Instance of Comments repository
      */
-    private $commentRepo = null;
+    private $commentRepo = NULL;
 
     /**
      * @var array $formData 
