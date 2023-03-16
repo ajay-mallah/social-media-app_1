@@ -145,10 +145,10 @@ use Exception;
         foreach ($names as $name) {
             $result = preg_match('/^[A-Za-z]*$/', $name);
             if (!$result) {
-                return false;
+                return FALSE;
             }
         }
-        return true;
+        return TRUE;
     }
 
     /**

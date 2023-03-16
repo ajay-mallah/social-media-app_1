@@ -100,7 +100,7 @@ class CommentHandler
      *     Returns an array having post data.
      */
     public function getComment(Comments $comment) {
-        $result = [
+        return [
             'id' => $comment->getId(),
             'commenter_id' => $comment->getCommenter()->getId(),
             'name' => $comment->getCommenter()->getFullname(),
@@ -108,8 +108,6 @@ class CommentHandler
             'time' => $comment->getCreateTime()->format('d-m-Y H:i:s'),
             'comment' => $comment->getComment()
         ];
-
-        return $result;
     }
 
     /**

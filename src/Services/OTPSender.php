@@ -20,19 +20,19 @@ class OTPSender extends Mailer
      * @var object $userRepo
      *   Instance of User repository
      */
-    private $userRepo = null;
+    private $userRepo = NULL;
 
     /**
      * @var object $otpRepo
      *   Instance of OTP repository
      */
-    private $otpRepo = null;
+    private $otpRepo = NULL;
 
     /** 
      * @var EntityManagerInterface $em
      *   Entity Manager instance.
      */
-    private $em = null;
+    private $em = NULL;
 
     /**
      * @var array $otpData 
