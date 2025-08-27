@@ -1,0 +1,36 @@
+{% if comment %}
+    <div class="user-comment-box">
+        <div class="user-icon--container">
+            {% if comment.image %}
+                <img src={{ asset(comment.image) }} alt="" class="user-icon">
+            {% else %}
+                <img src={{ asset('assets/image/icons/profile.png') }} alt="" class="user-icon">
+            {% endif %}
+        </div>
+        {% if comment.commenter_id == user %}
+            <div class="edit-container edit-comment-container">
+                <div class="edit-dots"><i class="dots"></i></div>
+                <ul class="edit-option" comment-id={{ comment.id }} post-id={{ post.id }}>
+                    <li class='edit edit-comment'>edit</li>
+                    <li class='edit delete-comment'>delete</li>
+                </ul>
+            </div>
+        {% endif %}
+        <div class="comment-body">
+            <p class="user-name">
+                {% if comment.name %}
+                    {{comment.name}}
+                {% endif %}
+            </p>
+            <p class="user-comment grow">
+                {% if comment.comment %}
+                    {{comment.comment}}
+                {% endif %}
+            </p>
+            <div class="edit-comment-input">
+                <textarea name="" id="" cols="30" rows="4"> {{ comment.comment }}</textarea>
+                <button class="comment-save-btn btn d-flex justify-content-center align-items-center" post-id={{ post.id }} comment-id = {{ comment.id }}><span class="text">save</span> <span class="loader-btn"></span> </button>
+            </div>
+        </div>
+    </div>
+{% endif %}
